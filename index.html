@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><title>Aprovação de Posts · Zel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--green:#3D4F33;--green-deep:#2F3E27;--gold:#C6974D;--gold-soft:#F3D19B;--brown:#8F6426;--cream:#F5EEE8;--ok:#2E8B2E;--warn:#C8101B;--ink:#1F2A1A;--line:rgba(61,79,51,.16)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+input,textarea,select{font:inherit;color:inherit}
+.anton{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;font-weight:400}
+.serif{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500}
+.top{background:var(--green);color:var(--cream);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:20}
+.brand{font-size:26px;color:var(--gold-soft);line-height:1}
+.brand small{font-family:Inter;font-size:11px;letter-spacing:.14em;color:var(--cream);opacity:.75;margin-left:10px;text-transform:uppercase}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 120px}
+.narrow{max-width:460px;margin:0 auto;padding:22px 16px 140px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:scale(.97)}
+.btn.gold{background:var(--gold);color:#fff;box-shadow:0 6px 18px rgba(198,151,77,.35)}
+.btn.green{background:var(--green);color:var(--cream)}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--green)}
+.btn.ok{background:var(--ok);color:#fff;box-shadow:0 6px 18px rgba(46,139,46,.3)}
+.btn.warn{background:#fff;border:1.5px solid var(--warn);color:var(--warn)}
+.btn.sm{padding:8px 13px;font-size:12.5px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+h1,h2,h3{margin:0}
+.hero h1{font-size:clamp(34px,9vw,54px);color:var(--green);line-height:1.02}
+.hero p{font-size:15px;line-height:1.55;color:#4a5a43;margin:10px 0 0}
+.hero .serif{color:var(--brown);font-size:1.15em}
+.prog{margin:18px 0 6px;background:rgba(61,79,51,.12);border-radius:99px;height:10px;overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--ok));border-radius:99px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.proginfo{display:flex;justify-content:space-between;font-size:13px;color:#4a5a43;font-weight:500}
+.tabs{display:flex;gap:6px;margin:18px 0;background:rgba(61,79,51,.08);padding:4px;border-radius:999px}
+.tabs button{flex:1;background:transparent;padding:10px;border-radius:999px;font-weight:600;font-size:13.5px;color:var(--green)}
+.tabs button.on{background:var(--green);color:var(--cream)}
+.banner{background:var(--gold-soft);color:var(--brown);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:14px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+/* instagram */
+.post{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;animation:up .5s both}
+@keyframes up{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+.ph{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--green));color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;overflow:hidden;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--gold)}
+.av img{width:100%;height:100%;object-fit:cover}
+.ph b{font-size:13.5px}.ph small{display:block;font-size:11.5px;color:#777}
+.ph .more{margin-left:auto;letter-spacing:2px;font-weight:700;color:#444}
+.media{position:relative;background:#111}
+.media.r45{aspect-ratio:4/5}.media.r916{aspect-ratio:9/16}
+.track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;height:100%;position:relative}
+.slide img,.slide video{width:100%;height:100%;object-fit:cover;display:block}
+.slide.art{display:grid;place-items:center;padding:24px;text-align:center;color:#fff}
+.slide.art b{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(30px,9vw,44px);line-height:1.05;text-shadow:0 2px 14px rgba(0,0,0,.25)}
+.cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:3px 9px;border-radius:99px;font-weight:600}
+.badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:4px 9px;border-radius:99px;font-weight:600;display:flex;gap:5px;align-items:center}
+.dots{display:flex;justify-content:center;gap:4px;padding:9px 0 0}
+.dots i{width:6px;height:6px;border-radius:50%;background:#c9c9c9;transition:.2s}
+.dots i.on{background:#3897f0;transform:scale(1.15)}
+.act{display:flex;gap:14px;padding:10px 12px 4px;align-items:center}
+.act svg{width:24px;height:24px;stroke:#111;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.act .sp{margin-left:auto}
+.likes{padding:2px 12px;font-size:13px}
+.cap{padding:3px 12px 0;font-size:13.5px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+.cap.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.more-btn{background:none;color:#777;padding:2px 12px;font-size:13px}
+.tag{color:#00376b}
+.pdate{padding:6px 12px 12px;font-size:10.5px;letter-spacing:.06em;color:#777;text-transform:uppercase}
+.apbar{padding:12px;border-top:1px dashed var(--line);background:#faf6f1}
+.apbar .row{display:flex;gap:8px;flex-wrap:wrap}
+.apbar .row .btn{flex:1;min-width:120px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.chip.pending{background:#eee6d8;color:var(--brown)}
+.chip.approved{background:#dcf1dc;color:var(--ok)}
+.chip.changes{background:#fde3e3;color:var(--warn)}
+.fb{width:100%;min-height:76px;border:1.5px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;resize:vertical;background:#fff}
+.feedlist{display:grid;gap:22px}
+.postno{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown);margin:0 2px 6px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+/* grid */
+.prof{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.prof .top2{display:flex;gap:16px;align-items:center}
+.prof .av{width:70px;height:70px;font-size:26px}
+.stats{display:flex;gap:18px;font-size:12px;text-align:center;color:#555}.stats b{display:block;font-size:16px;color:#111}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:14px}
+.gi{position:relative;aspect-ratio:4/5;background:#ddd;overflow:hidden}
+.gi>*:first-child{width:100%;height:100%;object-fit:cover;display:block}
+.gi.new::after{content:'NOVO';position:absolute;left:4px;bottom:4px;background:var(--gold);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:99px}
+.gi svg{position:absolute;top:6px;right:6px;width:18px;height:18px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.gi.art{display:grid;place-items:center;color:#fff;text-align:center;padding:6px}
+.gi.art b{font-family:Anton;font-weight:400;font-size:14px;text-transform:uppercase;line-height:1.1}
+/* sticky */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(245,238,232,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:30}
+.sticky .in{max-width:460px;margin:0 auto;display:grid;gap:8px}
+.done{text-align:center;padding:26px 16px;background:linear-gradient(160deg,var(--green),var(--green-deep));color:var(--cream);border-radius:18px;margin-bottom:16px;animation:up .6s both}
+.done h2{font-size:34px;color:var(--gold-soft)}
+.done p{margin:8px 0 0;font-size:14px;opacity:.9}
+.check{width:54px;height:54px;border-radius:50%;background:var(--ok);display:grid;place-items:center;margin:0 auto 10px;animation:pop .5s cubic-bezier(.2,1.6,.4,1) both}
+.check svg{width:28px;stroke:#fff;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+@keyframes pop{from{scale:0}to{scale:1}}
+/* admin */
+.adm{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;align-items:start}
+@media(max-width:820px){.adm{grid-template-columns:1fr}}
+.clist{display:grid;gap:8px}
+.cl{display:flex;gap:10px;align-items:center;padding:10px;border-radius:14px;background:#fff;border:1.5px solid var(--line);text-align:left;width:100%}
+.cl.on{border-color:var(--gold);box-shadow:0 4px 14px rgba(198,151,77,.25)}
+.cl .av{width:38px;height:38px}
+.cl b{font-size:14px;display:block}.cl small{font-size:12px;color:#777}
+.fld{display:grid;gap:5px;margin-bottom:12px;font-size:12.5px;font-weight:600;color:var(--green)}
+.fld input,.fld textarea,.fld select{border:1.5px solid var(--line);border-radius:10px;padding:10px;background:#fff;font-weight:400}
+.fld textarea{min-height:130px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hc{font-size:12px;font-weight:600}
+.hc.good{color:var(--ok)}.hc.bad{color:var(--warn)}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.thumbs div{width:70px;height:88px;border-radius:8px;overflow:hidden;position:relative;background:#ddd}
+.thumbs img,.thumbs video{width:100%;height:100%;object-fit:cover}
+.thumbs button{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.65);color:#fff;border-radius:50%;width:20px;height:20px;font-size:12px;line-height:1}
+.plist{display:grid;gap:10px;margin:14px 0}
+.pi{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
+.pi .th{width:56px;height:70px;border-radius:8px;overflow:hidden;flex:none;background:#ddd}
+.pi .th img,.pi .th video{width:100%;height:100%;object-fit:cover}
+.pi .th.art{display:grid;place-items:center;color:#fff;font-family:Anton;font-size:11px;text-align:center;text-transform:uppercase;padding:3px}
+.pi .mid{flex:1;min-width:160px;font-size:13px}
+.pi .mid p{margin:3px 0 0;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pi .ops{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pi select{border:1.5px solid var(--line);border-radius:99px;padding:6px 8px;font-size:12px;background:#fff}
+.linkbox{display:flex;gap:8px;flex-wrap:wrap}
+.linkbox input{flex:1;min-width:180px;border:1.5px solid var(--line);border-radius:10px;padding:10px;font-size:13px;background:#fff}
+.sect{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--brown);margin:0 0 8px}
+.fbq{background:#fde3e3;color:#7a1016;border-radius:10px;padding:8px 10px;font-size:12.5px;margin-top:6px}
+#toast{position:fixed;left:50%;bottom:90px;translate:-50% 20px;background:var(--green-deep);color:#fff;padding:11px 18px;border-radius:99px;font-size:13.5px;opacity:0;pointer-events:none;transition:.3s;z-index:60;max-width:90vw;text-align:center}
+#toast.on{opacity:1;translate:-50% 0}
+.land{max-width:420px;margin:12vh auto 0;text-align:center;padding:0 20px}
+.land h1{font-size:48px;color:var(--green)}
+.land input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:14px 18px;text-align:center;font-size:16px;margin:18px 0 10px;background:#fff}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.hint{font-size:12.5px;color:#666;line-height:1.5}.steps{font-size:13px;line-height:1.7;color:#444;padding-left:18px;margin:8px 0}.steps code{background:#f0e9de;padding:1px 5px;border-radius:5px}
+</style></head><body>
+<div id="app"></div><div id="toast"></div>
+<script>(function(){
+const Z=window.Z={};
+Z.$=s=>document.querySelector(s);
+Z.MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+Z.TIPO={feed:'Feed',carousel:'Carrossel',reels:'Reels'};
+Z.ST={pending:'Aguardando',approved:'Aprovado',changes:'Ajuste pedido'};
+Z.esc=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+Z.rnd=(n)=>{n=n||8;const a=new Uint8Array(n);crypto.getRandomValues(a);return [...a].map(x=>'abcdefghjkmnpqrstuvwxyz23456789'[x%31]).join('')};
+Z.dm=d=>{if(!d)return'';const a=d.split('-');return a[2]+'/'+a[1]};
+Z.long=(d,t)=>{if(!d)return'';const a=d.split('-');return a[2]+' de '+Z.MES[+a[1]-1]+(t?' · '+t:'')};
+Z.ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+Z.toast=m=>{const t=Z.$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(Z.toast.t);Z.toast.t=setTimeout(()=>t.classList.remove('on'),3200)};
+Z.I={
+ heart:'<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+ chat:'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.2A8.4 8.4 0 1 1 21 11.5z"/></svg>',
+ send:'<svg viewBox="0 0 24 24"><path d="M22 3 11 14M22 3l-7 18-4-7-7-4z"/></svg>',
+ save:'<svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+ play:'<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>',
+ stack:'<svg viewBox="0 0 24 24"><path d="M7 7h12v12H7zM4 4h12v2H6v10H4z"/></svg>',
+ ok:'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+};
+const esc=Z.esc,I=Z.I;
+Z.avatar=c=>`<div class="av">${c.avatar?`<img src="${esc(c.avatar)}" alt="">`:esc((c.name||'?').trim()[0].toUpperCase())}</div>`;
+Z.capHTML=t=>esc(t).replace(/#[\p{L}\p{N}_]+/gu,m=>'<span class="tag">'+m+'</span>');
+Z.countTags=t=>(t.match(/#[\p{L}\p{N}_]+/gu)||[]).length;
+Z.hcHTML=n=>n===5?'<span class="hc good">✓ 5 hashtags</span>':`<span class="hc bad">${n} hashtags — o ideal são 5</span>`;
+Z.cleanName=n=>String(n||'').replace(/\s*\(exemplo\)/,'');
+Z.mediaSrc=m=>m.obj||m.url;
+Z.slides=p=>p.media.map(m=>m.kind==='art'?`<div class="slide art" style="background:linear-gradient(145deg,${esc(m.c1)},${esc(m.c2)})"><b>${esc(m.t)}</b></div>`:m.kind==='video'?`<div class="slide"><video src="${esc(Z.mediaSrc(m))}" controls playsinline preload="metadata"></video></div>`:`<div class="slide"><img src="${esc(Z.mediaSrc(m))}" alt="" loading="lazy"></div>`).join('');
+Z.postCard=(c,p,n)=>{
+  const reels=p.type==='reels',many=p.media.length>1;
+  return `<article class="post" style="animation-delay:${Math.min(n,6)*70}ms">
+  <div class="ph">${Z.avatar(c)}<div><b>${esc(c.handle)}</b>${reels?'<small>Áudio original</small>':''}</div><span class="more">···</span></div>
+  <div class="media ${reels?'r916':'r45'}"><div class="track" data-track>${Z.slides(p)}</div>
+   ${reels?`<span class="badge">${I.play.replace('<svg','<svg style="width:12px;fill:#fff"')} Reels</span>`:''}
+   ${many?`<span class="cnt" data-cnt>1/${p.media.length}</span>`:''}</div>
+  ${many?`<div class="dots" data-dots>${p.media.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}
+  <div class="act">${I.heart}${I.chat}${I.send}<span class="sp">${I.save}</span></div>
+  <div class="likes">Curtido por <b>zel.agency</b> e <b>outras pessoas</b></div>
+  <div class="cap clamp" data-cap><b>${esc(c.handle)}</b> ${Z.capHTML(p.caption)}</div>
+  <button class="more-btn" data-act="more">mais</button>
+  <div class="pdate">${esc(Z.long(p.date,p.time))}</div></article>`;
+};
+Z.bindTracks=root=>{
+  root.querySelectorAll('[data-track]').forEach(t=>{
+    const box=t.parentElement,cnt=box.querySelector('[data-cnt]'),dots=box.parentElement.querySelector('[data-dots]');
+    t.addEventListener('scroll',()=>{const i=Math.round(t.scrollLeft/t.clientWidth);if(cnt)cnt.textContent=(i+1)+'/'+t.children.length;if(dots)[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i))},{passive:true});
+  });
+  root.querySelectorAll('[data-cap]').forEach(c=>{const b=c.nextElementSibling;if(c.scrollHeight<=c.clientHeight+2&&b)b.style.display='none'});
+};
+Z.waUrl=(num,m)=>'https://wa.me/'+(num||'')+'?text='+encodeURIComponent(m);
+Z.thumb=(m,cls)=>m.kind==='art'?`<div class="${cls} art" style="background:linear-gradient(145deg,${esc(m.c1)},${esc(m.c2)})">${esc(m.t)}</div>`:`<div class="${cls}">${m.kind==='video'?`<video src="${esc(Z.mediaSrc(m))}#t=0.1" muted playsinline></video>`:`<img src="${esc(Z.mediaSrc(m))}" alt="">`}</div>`;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act="more"]');if(b){const cap=b.previousElementSibling;cap.classList.toggle('clamp');b.textContent=cap.classList.contains('clamp')?'mais':'menos'}});
+})();
+</script>
+<script>
+/* Cliente: index.html?c=CODIGO   |   Painel da agência: index.html?admin */
+var ADMIN=new URLSearchParams(location.search).has('admin');
+if(!ADMIN){
+(function(){
+const {$,esc,I,TIPO,ST,dm}=Z;
+let C=null,tab='posts',err='';
+const params=new URLSearchParams(location.search);
+const code=(params.get('c')||decodeURIComponent((location.hash||'').slice(1))||'').trim().replace(/[^\w-]/g,'');
+const LAk='zel_ap_'+code;
+const LA=()=>{try{return JSON.parse(Z.ls.get(LAk)||'{}')}catch(e){return{}}};
+function setDec(p,s,fb){const a=LA();if(s==null)delete a[p.id];else a[p.id]={s,fb:fb||'',rv:p.rv||0};Z.ls.set(LAk,JSON.stringify(a))}
+function eff(p){if(p.status&&p.status!=='pending')return{s:p.status,fb:p.feedback||''};const l=LA()[p.id];return l&&l.rv===(p.rv||0)?{s:l.s,fb:l.fb}:{s:'pending',fb:''}}
+function waMsg(){
+  const L={approved:[],changes:[],pending:[]};
+  C.posts.forEach((p,i)=>{const e=eff(p);L[e.s].push({t:`Post ${i+1} (${TIPO[p.type]} · ${dm(p.date)})`,fb:e.fb})});
+  let m=`Olá, Zel! Aqui é ${Z.cleanName(C.name)}. Revisei as postagens:\n`;
+  if(L.approved.length)m+='\n✅ *Aprovadas*\n'+L.approved.map(x=>'• '+x.t).join('\n')+'\n';
+  if(L.changes.length)m+='\n✏️ *Preciso de ajuste*\n'+L.changes.map(x=>'• '+x.t+(x.fb?': '+x.fb:'')).join('\n')+'\n';
+  if(L.pending.length)m+='\n⏳ *Ainda vou ver*\n'+L.pending.map(x=>'• '+x.t).join('\n')+'\n';
+  return m;
+}
+function top(){return `<div class="top"><div class="brand anton">Zel<small>Aprovação de conteúdo</small></div></div>`}
+function view(){
+  if(!code||err){
+    return top()+`<div class="land"><h1 class="anton">Aprovação de posts</h1><p class="serif" style="font-size:22px;color:var(--brown)">${err?esc(err):'Digite o código que a Zel te enviou'}</p><input id="codein" placeholder="seu código" autocapitalize="off"><button class="btn gold" data-act="entercode" style="width:100%">Entrar</button></div>`;
+  }
+  if(!C)return top()+'<div class="land"><p class="serif" style="font-size:22px;color:var(--brown)">Carregando suas postagens…</p></div>';
+  const ps=C.posts,E=ps.map(eff);
+  const ap=E.filter(e=>e.s==='approved').length,ch=E.filter(e=>e.s==='changes').length,pe=ps.length-ap-ch;
+  const all=ps.length&&ap===ps.length,pct=ps.length?Math.round(ap/ps.length*100):0;
+  let body='';
+  if(!ps.length)body='<div class="card" style="text-align:center">Ainda não há postagens para revisar. Assim que a Zel subir, elas aparecem aqui.</div>';
+  else if(tab==='posts'){
+    body=(all?`<div class="done"><div class="check">${I.ok}</div><h2 class="anton">Tudo aprovado!</h2><p>Obrigado! Toque no botão abaixo para avisar a Zel — já vamos agendar tudo.</p></div>`:'')
+    +'<div class="feedlist">'+ps.map((p,i)=>{const e=E[i];
+      return `<div data-pid="${p.id}"><div class="postno"><span>Post ${i+1} · ${TIPO[p.type]}</span><span class="chip ${e.s}">${ST[e.s]}</span></div>${Z.postCard(C,p,i)}
+      <div class="apbar" style="border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;margin-top:-6px;position:relative">
+      ${e.s==='approved'?`<div class="row"><span class="chip approved" style="align-self:center">✓ Você aprovou</span><button class="btn ghost sm" data-act="undo">Desfazer</button></div>`
+       :e.s==='changes'?`<div class="fbq">Seu pedido: ${esc(e.fb)||'(sem detalhes)'}</div><div class="row" style="margin-top:8px"><button class="btn ok sm" data-act="approve">✓ Aprovar assim mesmo</button><button class="btn ghost sm" data-act="undo">Desfazer</button></div>`
+       :`<div class="row"><button class="btn ok" data-act="approve">✓ Aprovar</button><button class="btn warn" data-act="askchg">Pedir ajuste</button></div><div data-fbbox hidden><textarea class="fb" placeholder="O que você gostaria de mudar? (texto, imagem, data…)"></textarea><button class="btn gold sm" data-act="sendchg">Enviar pedido de ajuste</button></div>`}
+      </div></div>`}).join('')+'</div>';
+  }else{
+    body=`<div class="prof"><div class="top2">${Z.avatar(C)}<div><b style="font-size:16px">${esc(C.handle)}</b><div class="stats" style="margin-top:8px"><div><b>${ps.length}</b>novos posts</div><div><b>${ap}</b>aprovados</div><div><b>${pe+ch}</b>pendentes</div></div></div></div>
+    <div class="grid3">${ps.map(p=>{const m=p.media[0];const ic=p.type==='reels'?I.play:p.media.length>1?I.stack:'';
+      return m.kind==='art'?`<div class="gi art new" style="background:linear-gradient(145deg,${esc(m.c1)},${esc(m.c2)})"><b>${esc(m.t)}</b>${ic}</div>`:`<div class="gi new">${m.kind==='video'?`<video src="${esc(m.url)}#t=0.1" muted playsinline preload="metadata"></video>`:`<img src="${esc(m.url)}" alt="">`}${ic}</div>`}).join('')}</div>
+    <p style="font-size:12.5px;color:#777;margin:12px 0 0">Assim a grade do seu perfil fica com as novas postagens.</p></div>`;
+  }
+  const any=ap+ch>0;
+  return top()+`<div class="narrow">
+   <div class="hero"><h1 class="anton">Olá, ${esc(Z.cleanName(C.name))}</h1><p><span class="serif">Veja como suas postagens vão ficar no Instagram.</span> Aprove com 1 toque ou peça um ajuste — sem complicação.</p></div>
+   <div class="prog"><i style="width:${pct}%"></i></div><div class="proginfo"><span>${ap} de ${ps.length} aprovadas</span><span>${ch?ch+' com ajuste · ':''}${pe} aguardando</span></div>
+   <div class="tabs"><button class="${tab==='posts'?'on':''}" data-act="tab" data-t="posts">Postagens</button><button class="${tab==='grid'?'on':''}" data-act="tab" data-t="grid">Grade do perfil</button></div>${body}</div>
+  ${ps.length?`<div class="sticky"><div class="in">${pe>0?`<button class="btn ok" data-act="approveall">✓ Aprovar todas pendentes (${pe})</button>`:''}<a class="btn ${any?'gold':'ghost'}" style="text-decoration:none;${any?'':'pointer-events:none;opacity:.5'}" href="${any?esc(Z.waUrl(C.wa,waMsg())):'#'}" target="_blank" rel="noopener">Enviar resposta pelo WhatsApp</a></div></div>`:''}`;
+}
+function render(){const y=scrollY;$('#app').innerHTML=view();Z.bindTracks($('#app'));scrollTo(0,y)}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act;
+  const pw=b.closest('[data-pid]'),post=pw&&C?C.posts.find(x=>x.id===pw.dataset.pid):null;
+  if(act==='tab'){tab=b.dataset.t;render()}
+  else if(act==='approve'){setDec(post,'approved');render()}
+  else if(act==='undo'){setDec(post,null);render()}
+  else if(act==='askchg'){const bx=pw.querySelector('[data-fbbox]');bx.hidden=!bx.hidden;if(!bx.hidden)bx.querySelector('textarea').focus()}
+  else if(act==='sendchg'){const v=pw.querySelector('textarea').value.trim();if(!v){Z.toast('Conte o que você quer mudar');return}setDec(post,'changes',v);render()}
+  else if(act==='approveall'){C.posts.forEach(p=>{if(eff(p).s==='pending')setDec(p,'approved')});render();scrollTo({top:0,behavior:'smooth'})}
+  else if(act==='entercode'){const v=($('#codein').value||'').trim().replace(/[^\w-]/g,'');if(v)location.search='?c='+encodeURIComponent(v)}
+});
+render();
+if(code)fetch('data/'+code+'.json?v='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{C=d;render()}).catch(()=>{err='Código não encontrado. Confira com a Zel.';render()});
+})();
+
+}else{
+(function(){
+const {$,esc,TIPO,ST,dm}=Z;
+let cfg=null;try{cfg=JSON.parse(Z.ls.get('zel_gh')||'null')}catch(e){}
+let index=[],cur=null,D=null,view=cfg?'home':'setup',busy=false,prog='';
+const b64s=s=>btoa(unescape(encodeURIComponent(s)));
+const unb64=s=>decodeURIComponent(escape(atob(s.replace(/\n/g,''))));
+const siteBase=()=>(cfg&&cfg.site)||location.href.replace(/[^/]*(\?.*)?(#.*)?$/,'');
+const linkFor=c=>siteBase().replace(/\/?$/,'/')+'index.html?c='+c.code;
+/* GitHub API */
+async function api(path,method,body){
+  const url='https://api.github.com/repos/'+cfg.repo+'/contents/'+path+(method==='GET'||!method?'?ref='+encodeURIComponent(cfg.branch)+'&_='+Date.now():'');
+  const r=await fetch(url,{method:method||'GET',headers:{Authorization:'Bearer '+cfg.token,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+  if(r.status===404&&(!method||method==='GET'))return null;
+  if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){}throw new Error('GitHub '+r.status+(m?': '+m:''))}
+  return r.json();
+}
+async function getFile(path){const j=await api(path);if(!j)return null;return{sha:j.sha,text:j.content?unb64(j.content):''}}
+async function putFile(path,b64,msg,sha){const body={message:msg,content:b64,branch:cfg.branch};if(sha)body.sha=sha;return api(path,'PUT',body)}
+async function putJSON(path,obj,msg){
+  for(let t=0;t<2;t++){
+    const f=await getFile(path);
+    try{return await putFile(path,b64s(JSON.stringify(obj,null,1)),msg,f&&f.sha)}catch(e){if(t||!/409|422/.test(e.message))throw e}
+  }
+}
+const blob2b64=b=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result.split(',')[1]);r.onerror=no;r.readAsDataURL(b)});
+async function jpeg(file,max){
+  const bm=await createImageBitmap(file);const k=Math.min(1,max/Math.max(bm.width,bm.height));
+  const c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);
+  const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(bm,0,0,c.width,c.height);
+  return new Promise(ok=>c.toBlob(ok,'image/jpeg',.88));
+}
+async function uploadMedia(code,items,base){
+  let n=0;
+  for(const m of items){
+    if(!m.file)continue;n++;prog='Enviando mídia '+n+'…';draw();
+    let blob=m.file,ext=(m.file.name.split('.').pop()||'bin').toLowerCase();
+    if(m.kind==='img'){try{blob=await jpeg(m.file,1440);ext='jpg'}catch(e){}}
+    const path='media/'+code+'/'+base+'-'+Z.rnd(4)+'.'+ext;
+    await putFile(path,await blob2b64(blob),'Mídia '+code,null);
+    m.url=path;delete m.file;delete m.obj;
+  }
+}
+/* data */
+async function loadIndex(){const f=await getFile('data/clients.json');index=f?JSON.parse(f.text):[]}
+async function openClient(code){const f=await getFile('data/'+code+'.json');if(!f)throw new Error('Cliente não encontrado');cur=JSON.parse(f.text);view='client'}
+async function mutate(fn,msg){const f=await getFile('data/'+cur.code+'.json');const d=JSON.parse(f.text);fn(d);await putFile('data/'+cur.code+'.json',b64s(JSON.stringify(d,null,1)),msg,f.sha);cur=d}
+async function run(fn,okmsg){
+  if(busy)return;busy=true;draw();
+  try{await fn();if(okmsg)Z.toast(okmsg)}catch(e){Z.toast(e.message||'Erro');console.error(e)}
+  busy=false;prog='';draw();
+}
+/* views */
+function top(sub,right){return `<div class="top"><div class="brand anton">Zel<small>${sub}</small></div><div>${right||''}</div></div>`}
+function vSetup(){
+  const c=cfg||{repo:'',branch:'main',token:'',site:''};
+  return top('Configuração')+`<div class="narrow"><div class="card"><h2 class="anton" style="font-size:26px;color:var(--green)">Conectar ao GitHub</h2>
+  <p class="hint">O painel salva os posts direto no seu repositório. O token fica guardado só neste navegador.</p>
+  <ol class="steps"><li>GitHub → Settings → Developer settings → <b>Fine-grained tokens</b> → Generate.</li><li>Em “Repository access”, escolha só o repositório deste site.</li><li>Em “Permissions → Contents”, marque <b>Read and write</b>.</li><li>Copie o token e cole abaixo.</li></ol>
+  <label class="fld">Repositório (usuario/nome)<input id="g-repo" value="${esc(c.repo)}" placeholder="zelagency/aprovacao"></label>
+  <label class="fld">Branch<input id="g-branch" value="${esc(c.branch)}"></label>
+  <label class="fld">Token do GitHub<input id="g-token" type="password" value="${esc(c.token)}" placeholder="github_pat_…"></label>
+  <label class="fld">Endereço do site (opcional, ex.: https://zelagency.github.io/aprovacao/)<input id="g-site" value="${esc(c.site||'')}"></label>
+  <button class="btn gold" data-act="savecfg" ${busy?'disabled':''}>${busy?'Testando…':'Testar e salvar'}</button></div></div>`;
+}
+function vHome(){
+  return top('Painel · aprovação de posts',`<button class="btn ghost sm" style="color:var(--cream);border-color:rgba(255,255,255,.4)" data-act="setup">⚙ GitHub</button>`)+`<div class="wrap" style="max-width:560px">
+  <p class="sect">Clientes</p><div class="clist">${index.map(x=>`<button class="cl" data-act="open" data-code="${esc(x.code)}"><div class="av">${esc((x.name||'?')[0].toUpperCase())}</div><span><b>${esc(x.name)}</b><small>@${esc(x.handle)}</small></span></button>`).join('')||'<div class="card hint">Nenhum cliente ainda.</div>'}</div>
+  <button class="btn green" style="width:100%;margin-top:12px" data-act="newclient">+ Novo cliente</button></div>`;
+}
+function vClient(){
+  const c=cur,link=linkFor(c);
+  return top(esc(c.name),`<button class="btn ghost sm" style="color:var(--cream);border-color:rgba(255,255,255,.4)" data-act="home">← Clientes</button>`)+`<div class="wrap" style="max-width:820px">
+  <div class="card"><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between"><div style="display:flex;gap:12px;align-items:center">${Z.avatar(c)}<div><h2 class="anton" style="font-size:26px;color:var(--green)">${esc(c.name)}</h2><small>@${esc(c.handle)} · código <b>${esc(c.code)}</b></small></div></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn green sm" style="text-decoration:none" href="index.html?c=${esc(c.code)}" target="_blank">👁 Ver como cliente</a><button class="btn ghost sm" data-act="editclient">Editar</button><button class="btn warn sm" data-act="delclient">Excluir</button></div></div>
+  <p class="sect" style="margin-top:16px">Link para enviar ao cliente</p>
+  <div class="linkbox"><input readonly id="lnk" value="${esc(link)}"><button class="btn gold sm" data-act="copylink">Copiar</button><a class="btn green sm" style="text-decoration:none" target="_blank" rel="noopener" href="${esc(Z.waUrl('','Olá! Segue o link para você ver e aprovar as postagens do seu Instagram: '+link))}">Enviar no WhatsApp</a></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 0"><p class="sect" style="margin:0">Postagens (${c.posts.length})</p><button class="btn gold sm" data-act="newpost">+ Nova postagem</button></div>
+  <div class="plist">${c.posts.map((p,i)=>{const e=p.status||'pending';
+   return `<div class="pi" data-pid="${p.id}">${Z.thumb(p.media[0],'th')}<div class="mid"><b>Post ${i+1} · ${TIPO[p.type]}</b> <span class="chip ${e}">${ST[e]}</span><p>${esc(dm(p.date))} ${esc(p.time||'')} · ${esc(p.caption.split('\n')[0])}</p></div>
+   <div class="ops"><select data-act="setst"><option value="pending" ${e==='pending'?'selected':''}>Aguardando</option><option value="approved" ${e==='approved'?'selected':''}>Aprovado</option><option value="changes" ${e==='changes'?'selected':''}>Ajuste</option></select><button class="btn ghost sm" data-act="up">↑</button><button class="btn ghost sm" data-act="editpost">Editar</button><button class="btn warn sm" data-act="delpost">✕</button></div></div>`}).join('')||'<div class="card" style="text-align:center">Nenhuma postagem ainda.</div>'}</div>
+  <div class="card hint">💡 O cliente responde pelo WhatsApp. Quando ele aprovar, marque o status aqui no menu “Aguardando”. Mudanças levam cerca de 1 minuto para aparecer no site (publicação do GitHub Pages). Se você editar um post, ele volta para “Aguardando”.</div></div>`;
+}
+function vFormClient(){
+  const c=D;
+  return top(c.isNew?'Novo cliente':'Editar cliente')+`<div class="narrow"><div class="card">
+  <label class="fld">Nome do cliente<input id="f-name" value="${esc(c.name)}"></label>
+  <label class="fld">@ do Instagram (sem @)<input id="f-handle" value="${esc(c.handle)}"></label>
+  <label class="fld">Código do link (difícil de adivinhar)<input id="f-code" value="${esc(c.code)}" ${c.isNew?'':'readonly'}></label>
+  <label class="fld">WhatsApp da agência (55 + DDD)<input id="f-wa" value="${esc(c.wa)}"></label>
+  <label class="fld">Foto de perfil (opcional)<input type="file" id="f-av" accept="image/*"></label><div id="avprev" class="thumbs">${c.avatar||c.avObj?`<div><img src="${esc(c.avObj||c.avatar)}"></div>`:''}</div>
+  <p class="hint">${esc(prog)}</p>
+  <div style="display:flex;gap:8px"><button class="btn gold" data-act="saveclient" ${busy?'disabled':''}>${busy?'Salvando…':'Salvar'}</button><button class="btn ghost" data-act="cancel">Cancelar</button></div></div></div>`;
+}
+const thumbsHTML=()=>D.media.map((m,i)=>`<div>${m.kind==='art'?`<div style="width:100%;height:100%;background:linear-gradient(145deg,${esc(m.c1)},${esc(m.c2)})"></div>`:m.kind==='video'?`<video src="${esc(Z.mediaSrc(m))}#t=0.1" muted playsinline></video>`:`<img src="${esc(Z.mediaSrc(m))}" alt="">`}<button data-act="rmmedia" data-i="${i}">×</button></div>`).join('');
+function vFormPost(){
+  const p=D;
+  return top(p.id?'Editar postagem':'Nova postagem')+`<div class="narrow" style="max-width:560px"><div class="card">
+  <div class="two"><label class="fld">Formato<select id="f-type"><option value="feed" ${p.type==='feed'?'selected':''}>Feed (1 imagem)</option><option value="carousel" ${p.type==='carousel'?'selected':''}>Carrossel (2–10)</option><option value="reels" ${p.type==='reels'?'selected':''}>Reels (vídeo)</option></select></label>
+  <label class="fld">Mídia<input type="file" id="f-media" accept="image/*,video/*" multiple></label></div>
+  <div class="thumbs" id="thumbs">${thumbsHTML()}</div>
+  <label class="fld">Legenda<textarea id="f-cap" placeholder="Escreva a legenda com as hashtags…">${esc(p.caption)}</textarea></label><div style="margin:-6px 0 12px" id="hc">${Z.hcHTML(Z.countTags(p.caption))}</div>
+  <div class="two"><label class="fld">Data<input type="date" id="f-date" value="${esc(p.date)}"></label><label class="fld">Horário<input type="time" id="f-time" value="${esc(p.time)}"></label></div>
+  <p class="hint" id="prog">${esc(prog)}</p>
+  <div style="display:flex;gap:8px"><button class="btn gold" data-act="savepost" ${busy?'disabled':''}>${busy?'Enviando…':'Salvar postagem'}</button><button class="btn ghost" data-act="cancel">Cancelar</button></div></div></div>`;
+}
+function draw(){
+  const y=scrollY;let h='';
+  if(view==='setup')h=vSetup();else if(view==='home')h=vHome();else if(view==='client')h=vClient();else if(view==='fclient')h=vFormClient();else if(view==='fpost')h=vFormPost();
+  $('#app').innerHTML=h;scrollTo(0,y);
+}
+/* events */
+document.addEventListener('input',e=>{if(e.target.id==='f-cap'){D.caption=e.target.value;$('#hc').innerHTML=Z.hcHTML(Z.countTags(e.target.value))}});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='f-media'){D.type=$('#f-type').value;const fs=[...t.files].map(f=>({kind:f.type.startsWith('video')?'video':'img',file:f,obj:URL.createObjectURL(f)}));
+    D.media=(D.type==='carousel'?D.media.concat(fs):fs.slice(0,1)).slice(0,10);if(D.type==='reels'&&D.media[0]&&D.media[0].kind!=='video')Z.toast('Para Reels, envie um vídeo');$('#thumbs').innerHTML=thumbsHTML()}
+  if(t.id==='f-av'&&t.files[0]){D.avFile=t.files[0];D.avObj=URL.createObjectURL(t.files[0]);$('#avprev').innerHTML=`<div><img src="${esc(D.avObj)}"></div>`}
+  if(t.dataset&&t.dataset.act==='setst'){const id=t.closest('[data-pid]').dataset.pid,v=t.value;run(()=>mutate(d=>{const p=d.posts.find(x=>x.id===id);p.status=v;p.rv=(p.rv||0)+1;if(v!=='changes')p.feedback=''},'Status '+v),'Status atualizado')}
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b||b.tagName==='SELECT')return;
+  const act=b.dataset.act,pw=b.closest('[data-pid]'),pid=pw&&pw.dataset.pid;
+  switch(act){
+   case'savecfg':{const c={repo:$('#g-repo').value.trim().replace(/^https?:\/\/github\.com\//,''),branch:$('#g-branch').value.trim()||'main',token:$('#g-token').value.trim(),site:$('#g-site').value.trim()};
+     if(!c.repo||!c.token){Z.toast('Preencha repositório e token');break}
+     const old=cfg;cfg=c;run(async()=>{try{const r=await fetch('https://api.github.com/repos/'+c.repo,{headers:{Authorization:'Bearer '+c.token}});if(!r.ok)throw new Error('Repositório ou token inválido ('+r.status+')');await loadIndex();Z.ls.set('zel_gh',JSON.stringify(c));view='home'}catch(e){cfg=old;throw e}},'Conectado!');break}
+   case'setup':view='setup';draw();break;
+   case'home':view='home';run(loadIndex);break;
+   case'open':run(()=>openClient(b.dataset.code));break;
+   case'newclient':D={isNew:true,name:'',handle:'',code:Z.rnd(10),wa:'5522988746035',avatar:''};view='fclient';draw();break;
+   case'editclient':D=Object.assign({isNew:false},JSON.parse(JSON.stringify({name:cur.name,handle:cur.handle,code:cur.code,wa:cur.wa||'',avatar:cur.avatar||''})));view='fclient';draw();break;
+   case'saveclient':{D.name=$('#f-name').value.trim();D.handle=$('#f-handle').value.trim().replace(/^@/,'');D.wa=$('#f-wa').value.replace(/\D/g,'');if(D.isNew)D.code=$('#f-code').value.trim().replace(/[^\w-]/g,'');
+     if(!D.name||!D.handle||!D.code){Z.toast('Preencha nome, @ e código');break}
+     if(D.isNew&&index.some(x=>x.code===D.code)){Z.toast('Esse código já existe');break}
+     const d=D;run(async()=>{
+       if(d.avFile){prog='Enviando foto…';draw();const bl=await jpeg(d.avFile,400);const path='media/'+d.code+'/avatar-'+Z.rnd(4)+'.jpg';await putFile(path,await blob2b64(bl),'Avatar '+d.code,null);d.avatar=path}
+       if(d.isNew){const nd={code:d.code,name:d.name,handle:d.handle,avatar:d.avatar||'',wa:d.wa,posts:[]};await putJSON('data/'+d.code+'.json',nd,'Novo cliente '+d.name);index.push({code:d.code,name:d.name,handle:d.handle});await putJSON('data/clients.json',index,'Índice de clientes');cur=nd}
+       else{await mutate(x=>{x.name=d.name;x.handle=d.handle;x.wa=d.wa;x.avatar=d.avatar},'Editar cliente');const i=index.find(x=>x.code===d.code);if(i){i.name=d.name;i.handle=d.handle;await putJSON('data/clients.json',index,'Índice de clientes')}}
+       view='client'},'Cliente salvo');break}
+   case'delclient':if(confirm('Excluir '+cur.name+'? As postagens deste cliente saem do site.')){const code=cur.code;run(async()=>{const f=await getFile('data/'+code+'.json');if(f)await api('data/'+code+'.json','DELETE',{message:'Excluir cliente '+code,sha:f.sha,branch:cfg.branch});index=index.filter(x=>x.code!==code);await putJSON('data/clients.json',index,'Índice de clientes');view='home'},'Cliente excluído')}break;
+   case'copylink':{const i=$('#lnk');i.select();(navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.reject()).then(()=>Z.toast('Link copiado!')).catch(()=>Z.toast('Selecione e copie o link'));break}
+   case'newpost':D={id:null,type:'feed',media:[],caption:'',date:'',time:'12:00',status:'pending'};view='fpost';draw();break;
+   case'editpost':D=JSON.parse(JSON.stringify(cur.posts.find(x=>x.id===pid)));view='fpost';draw();break;
+   case'rmmedia':D.media.splice(+b.dataset.i,1);$('#thumbs').innerHTML=thumbsHTML();break;
+   case'savepost':{D.type=$('#f-type').value;D.caption=$('#f-cap').value;D.date=$('#f-date').value;D.time=$('#f-time').value;
+     if(!D.media.length){Z.toast('Envie pelo menos uma mídia');break}
+     if(D.type==='carousel'&&D.media.length<2){Z.toast('Carrossel precisa de 2 ou mais mídias');break}
+     if(D.type==='reels'&&D.media[0].kind!=='video'){Z.toast('Reels precisa de um vídeo');break}
+     if(D.type!=='carousel')D.media=D.media.slice(0,1);
+     const d=D;run(async()=>{
+       const id=d.id||'p'+Z.rnd(5);await uploadMedia(cur.code,d.media,id);
+       const post={id,type:d.type,media:d.media.map(m=>m.kind==='art'?m:{kind:m.kind,url:m.url}),caption:d.caption,date:d.date,time:d.time,status:'pending',rv:0};
+       prog='Publicando no GitHub…';draw();
+       await mutate(x=>{const i=x.posts.findIndex(k=>k.id===id);if(i>=0){post.rv=(x.posts[i].rv||0)+1;x.posts[i]=post}else x.posts.push(post)},'Postagem '+id);
+       view='client'},'Postagem salva — aparece no site em ~1 min');break}
+   case'delpost':if(confirm('Excluir esta postagem?'))run(()=>mutate(d=>{d.posts=d.posts.filter(x=>x.id!==pid)},'Excluir postagem'),'Excluída');break;
+   case'up':{const i=cur.posts.findIndex(x=>x.id===pid);if(i>0)run(()=>mutate(d=>{[d.posts[i-1],d.posts[i]]=[d.posts[i],d.posts[i-1]]},'Reordenar'));break}
+   case'cancel':view=cur&&view!=='fclient'||(cur&&!D.isNew)?'client':'home';D=null;draw();break;
+  }
+});
+draw();
+if(cfg)run(loadIndex);
+})();
+
+}
+</script></body></html>
